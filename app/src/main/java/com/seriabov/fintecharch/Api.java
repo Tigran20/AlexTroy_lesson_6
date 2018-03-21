@@ -1,5 +1,7 @@
 package com.seriabov.fintecharch;
 
+import com.seriabov.fintecharch.service.model.CoinInfo;
+
 import java.util.List;
 
 import retrofit2.Call;
