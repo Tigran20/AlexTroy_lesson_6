@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.seriabov.fintecharch.service.model.CoinInfo;
 import com.seriabov.fintecharch.R;
+import com.seriabov.fintecharch.view.callback.CoinClickCallback;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,8 +24,11 @@ public class CoinsAdapter extends RecyclerView.Adapter<CoinsAdapter.CoinsViewHol
 
     private OnItemClickListener listener;
 
+//    private final CoinClickCallback coinClickCallback;
+
     public CoinsAdapter(OnItemClickListener listener) {
         this.listener = listener;
+//        this.coinClickCallback = coinClickCallback;
     }
 
     @NonNull
@@ -32,6 +36,7 @@ public class CoinsAdapter extends RecyclerView.Adapter<CoinsAdapter.CoinsViewHol
     public CoinsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View layout = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_coin, parent, false);
+
         return new CoinsViewHolder(layout, listener);
     }
 

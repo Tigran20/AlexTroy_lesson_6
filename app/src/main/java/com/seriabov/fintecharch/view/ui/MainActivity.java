@@ -15,7 +15,7 @@ import com.seriabov.fintecharch.service.repository.AppDelegate;
 import com.seriabov.fintecharch.service.model.CoinInfo;
 import com.seriabov.fintecharch.R;
 import com.seriabov.fintecharch.view.adapter.CoinsAdapter;
-import com.seriabov.fintecharch.viewmodel.CoinsViewModel;
+import com.seriabov.fintecharch.viewmodel.CoinViewModel;
 
 import java.util.List;
 
@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
     private View contentView;
     private View loadingView;
 
-    private CoinsViewModel viewModel;
+    private CoinViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,9 +50,7 @@ public class MainActivity extends AppCompatActivity {
         loadingView = findViewById(R.id.loading_layout);
 
 
-
-        viewModel = ViewModelProviders.of(this).get(CoinsViewModel.class);
-
+        viewModel = ViewModelProviders.of(this).get(CoinViewModel.class);
 
 
         initRecyclerView();

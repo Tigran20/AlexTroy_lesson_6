@@ -33,12 +33,54 @@ public class DetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
         CoinInfo info = (CoinInfo) getIntent().getSerializableExtra(EXTRA_INFO);
         getSupportActionBar().setTitle(info.getSymbol());
 
+        init(info);
+        setImage(info);
+    }
+
+    private void init(CoinInfo info) {
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        TextView title = findViewById(R.id.coin_title);
+        TextView price = findViewById(R.id.price_value);
+        TextView change7d = findViewById(R.id.change_value_7d);
+        TextView change24h = findViewById(R.id.change_value_24h);
+        TextView change1h = findViewById(R.id.change_value_1h);
+        TextView marketCap = findViewById(R.id.market_cap_value);
+        TextView lastUpdate = findViewById(R.id.last_update_value);
+
+        title.setText(info.getName());
+        price.setText(getString(R.string.price_format, info.getPriceUsd()));
+        change7d.setText(getString(R.string.percent_format, info.getPercentChange7d()));
+        if (info.getPercentChange7d() > 0) {
+            change7d.setTextColor(ContextCompat.getColor(this, R.color.green700));
+        } else {
+            change7d.setTextColor(ContextCompat.getColor(this, R.color.red700));
+        }
+
+        change24h.setText(getString(R.string.percent_format, info.getPercentChange24h()));
+        if (info.getPercentChange24h() > 0) {
+            change24h.setTextColor(ContextCompat.getColor(this, R.color.green700));
+        } else {
+            change24h.setTextColor(ContextCompat.getColor(this, R.color.red700));
+        }
+
+        change1h.setText(getString(R.string.percent_format, info.getPercentChange1h()));
+        if (info.getPercentChange1h() > 0) {
+            change1h.setTextColor(ContextCompat.getColor(this, R.color.green700));
+        } else {
+            change1h.setTextColor(ContextCompat.getColor(this, R.color.red700));
+        }
+
+        marketCap.setText(getString(R.string.price_format, info.getMarketCapUsd()));
+        lastUpdate.setText(DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.MEDIUM, Locale.getDefault())
+                .format(new Date(info.getLastUpdated())));
+    }
+
+    private void setImage(CoinInfo info) {
         ImageView logo = findViewById(R.id.coin_logo);
 
         String logoUrl = getString(R.string.coin_logo_url, info.getSymbol().toLowerCase());
@@ -46,48 +88,5 @@ public class DetailsActivity extends AppCompatActivity {
         Glide.with(this)
                 .load(logoUrl)
                 .into(logo);
-
-        TextView title = findViewById(R.id.coin_title);
-        title.setText(info.getName());
-
-        TextView price = findViewById(R.id.price_value);
-        price.setText(getString(R.string.price_format, info.getPriceUsd()));
-
-        TextView change7d = findViewById(R.id.change_value_7d);
-        change7d.setText(getString(R.string.percent_format, info.getPercentChange7d()));
-
-        if (info.getPercentChange7d() > 0) {
-            change7d.setTextColor(ContextCompat.getColor(this, R.color.green700));
-        } else {
-            change7d.setTextColor(ContextCompat.getColor(this, R.color.red700));
-        }
-
-
-        TextView change24h = findViewById(R.id.change_value_24h);
-        change24h.setText(getString(R.string.percent_format, info.getPercentChange24h()));
-
-        if (info.getPercentChange24h() > 0) {
-            change24h.setTextColor(ContextCompat.getColor(this, R.color.green700));
-        } else {
-            change24h.setTextColor(ContextCompat.getColor(this, R.color.red700));
-        }
-
-
-        TextView change1h = findViewById(R.id.change_value_1h);
-        change1h.setText(getString(R.string.percent_format, info.getPercentChange1h()));
-
-        if (info.getPercentChange1h() > 0) {
-            change1h.setTextColor(ContextCompat.getColor(this, R.color.green700));
-        } else {
-            change1h.setTextColor(ContextCompat.getColor(this, R.color.red700));
-        }
-
-
-        TextView marketCap = findViewById(R.id.market_cap_value);
-        marketCap.setText(getString(R.string.price_format, info.getMarketCapUsd()));
-
-        TextView lastUpdate = findViewById(R.id.last_update_value);
-        lastUpdate.setText(DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.MEDIUM, Locale.getDefault())
-                .format(new Date(info.getLastUpdated())));
     }
 }
