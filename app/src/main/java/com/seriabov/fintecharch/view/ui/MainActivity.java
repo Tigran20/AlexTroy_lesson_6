@@ -1,6 +1,5 @@
 package com.seriabov.fintecharch.view.ui;
 
-import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -11,9 +10,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.seriabov.fintecharch.service.repository.AppDelegate;
-import com.seriabov.fintecharch.service.model.CoinInfo;
 import com.seriabov.fintecharch.R;
+import com.seriabov.fintecharch.service.model.CoinInfo;
+import com.seriabov.fintecharch.service.repository.AppDelegate;
 import com.seriabov.fintecharch.view.adapter.CoinsAdapter;
 import com.seriabov.fintecharch.viewmodel.CoinViewModel;
 
@@ -39,22 +38,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(view -> getData());
-
-        errorView = findViewById(R.id.error_layout);
-        contentView = findViewById(R.id.main_recycler_view);
-        loadingView = findViewById(R.id.loading_layout);
-
-
-        viewModel = ViewModelProviders.of(this).get(CoinViewModel.class);
-
+        init();
 
         initRecyclerView();
-
         getData();
     }
 
@@ -114,5 +100,17 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new CoinsAdapter(coinInfo -> DetailsActivity.start(MainActivity.this, coinInfo));
         recyclerView.setAdapter(adapter);
+    }
+
+    private void init() {
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        FloatingActionButton fab = findViewById(R.id.fab);
+        fab.setOnClickListener(view -> getData());
+
+        errorView = findViewById(R.id.error_layout);
+        contentView = findViewById(R.id.main_recycler_view);
+        loadingView = findViewById(R.id.loading_layout);
     }
 }
