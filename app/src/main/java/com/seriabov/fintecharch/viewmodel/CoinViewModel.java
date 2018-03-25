@@ -34,16 +34,16 @@ public class CoinViewModel extends ViewModel {
     public LiveData<List<CoinInfo>> getCoins() {
         if (coins == null) {
             coins = new MutableLiveData<>();
-            getData();
+            getData(false);
         }
         return coins;
     }
 
     public void refreshData(){
-        getData();
+        getData(true);
     }
 
-    private void getData() {
+    private void getData(boolean isRefresh) {
         listener.showLoading();
         AppDelegate.from(context)
                 .getApiService()
@@ -52,6 +52,9 @@ public class CoinViewModel extends ViewModel {
                     @Override
                     public void onResponse(Call<List<CoinInfo>> call, Response<List<CoinInfo>> response) {
                         coins.setValue(response.body());
+                        if (isRefresh){
+                            listener.setNewData(response.body());
+                        }
                     }
 
                     @Override
@@ -64,5 +67,6 @@ public class CoinViewModel extends ViewModel {
     public interface ListenerCoinViewModel {
         void showError(Throwable error);
         void showLoading();
+        void setNewData(List<CoinInfo> coinInfos);
     }
 }

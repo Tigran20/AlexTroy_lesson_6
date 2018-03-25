@@ -12,7 +12,10 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.seriabov.fintecharch.R;
+import com.seriabov.fintecharch.model.CoinInfo;
 import com.seriabov.fintecharch.viewModel.CoinViewModel;
+
+import java.util.List;
 
 import timber.log.Timber;
 
@@ -42,7 +45,10 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(view -> coinViewModel.refreshData());
+        fab.setOnClickListener(view -> {
+            coinViewModel.refreshData();
+            adapter.setData(coinViewModel.getCoins().getValue());
+        });
         errorView = findViewById(R.id.error_layout);
         contentView = findViewById(R.id.main_recycler_view);
         loadingView = findViewById(R.id.loading_layout);
@@ -62,6 +68,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void showLoading() {
                 loadingView.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            public void setNewData(List<CoinInfo> coinInfos) {
+                errorView.setVisibility(View.GONE);
+                loadingView.setVisibility(View.GONE);
+                contentView.setVisibility(View.VISIBLE);
+                adapter.setData(coinInfos);
             }
         });
 
@@ -85,6 +99,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (id == R.id.action_refresh) {
             coinViewModel.refreshData();
+            adapter.setData(coinViewModel.getCoins().getValue());
             return true;
         }
 

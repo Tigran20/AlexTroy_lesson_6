@@ -1,194 +1,214 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<layout
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.seriabov.fintecharch.view.MainActivity">
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="viewModel"
+            type="com.seriabov.fintecharch.viewModel.CoinDetailViewModel"/>
+    </data>
 
-    <android.support.design.widget.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
-
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
-
-    </android.support.design.widget.AppBarLayout>
-
-    <ScrollView
+    <android.support.design.widget.CoordinatorLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        tools:context="com.seriabov.fintecharch.view.MainActivity">
 
-        <android.support.constraint.ConstraintLayout
+        <android.support.design.widget.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/AppTheme.AppBarOverlay">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="?attr/colorPrimary"
+                app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+        </android.support.design.widget.AppBarLayout>
+
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="16dp">
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-            <ImageView
-                android:id="@+id/coin_logo"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:src="@tools:sample/avatars" />
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="16dp">
 
-            <TextView
-                android:id="@+id/coin_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/coin_logo"
-                tools:text="@tools:sample/lorem" />
+                <ImageView
+                    android:id="@+id/coin_logo"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    app:imageUrl="@{viewModel.imageUrl}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:src="@tools:sample/avatars" />
 
-            <TextView
-                android:id="@+id/price_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/price_label"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/coin_title" />
+                <TextView
+                    android:id="@+id/coin_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{viewModel.title}"
+                    android:layout_marginTop="16dp"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/coin_logo"
+                    tools:text="@tools:sample/lorem" />
 
-            <TextView
-                android:id="@+id/price_value"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/price_label"
-                tools:text="@tools:sample/us_zipcodes" />
+                <TextView
+                    android:id="@+id/price_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/price_label"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/coin_title" />
 
-            <TextView
-                android:id="@+id/market_cap_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/market_cap_label"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                <TextView
+                    android:id="@+id/price_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@{viewModel.price}"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/price_label"
+                    tools:text="@tools:sample/us_zipcodes" />
 
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/price_value" />
+                <TextView
+                    android:id="@+id/market_cap_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/market_cap_label"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
 
-            <TextView
-                android:id="@+id/market_cap_value"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/market_cap_label"
-                tools:text="@tools:sample/us_zipcodes" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/price_value" />
 
-            <TextView
-                android:id="@+id/change_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/change_label"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                <TextView
+                    android:id="@+id/market_cap_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@{viewModel.marketCup}"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/market_cap_label"
+                    tools:text="@tools:sample/us_zipcodes" />
 
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/market_cap_value" />
+                <TextView
+                    android:id="@+id/change_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/change_label"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/market_cap_value" />
 
-            <TextView
-                android:id="@+id/change_label_1h"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/change_label_1h"
-                android:textAppearance="@style/TextAppearance.AppCompat.Button"
+                <TextView
+                    android:id="@+id/change_label_1h"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/change_label_1h"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Button"
+                    app:layout_constraintEnd_toStartOf="@+id/change_label_24h"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/change_label" />
 
-                app:layout_constraintEnd_toStartOf="@+id/change_label_24h"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/change_label" />
+                <TextView
+                    android:id="@+id/change_label_24h"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/change_label_24h"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Button"
 
-            <TextView
-                android:id="@+id/change_label_24h"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/change_label_24h"
-                android:textAppearance="@style/TextAppearance.AppCompat.Button"
+                    app:layout_constraintEnd_toStartOf="@+id/change_label_7d"
+                    app:layout_constraintStart_toEndOf="@+id/change_label_1h"
+                    app:layout_constraintTop_toBottomOf="@+id/change_label" />
 
-                app:layout_constraintEnd_toStartOf="@+id/change_label_7d"
-                app:layout_constraintStart_toEndOf="@+id/change_label_1h"
-                app:layout_constraintTop_toBottomOf="@+id/change_label" />
+                <TextView
+                    android:id="@+id/change_label_7d"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/change_label_7d"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Button"
 
-            <TextView
-                android:id="@+id/change_label_7d"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/change_label_7d"
-                android:textAppearance="@style/TextAppearance.AppCompat.Button"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/change_label_24h"
+                    app:layout_constraintTop_toBottomOf="@+id/change_label" />
 
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/change_label_24h"
-                app:layout_constraintTop_toBottomOf="@+id/change_label" />
+                <TextView
+                    android:id="@+id/change_value_1h"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@{viewModel.change1d}"
+                    android:textColor="@{viewModel.colorChange1d}"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+                    app:layout_constraintStart_toStartOf="@+id/change_label_1h"
+                    app:layout_constraintTop_toBottomOf="@+id/change_label_1h"
+                    tools:text="@tools:sample/us_zipcodes" />
 
-            <TextView
-                android:id="@+id/change_value_1h"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
-                app:layout_constraintStart_toStartOf="@+id/change_label_1h"
-                app:layout_constraintTop_toBottomOf="@+id/change_label_1h"
-                tools:text="@tools:sample/us_zipcodes" />
+                <TextView
+                    android:id="@+id/change_value_24h"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@{viewModel.change24d}"
+                    android:textColor="@{viewModel.colorChange24d}"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+                    app:layout_constraintStart_toStartOf="@+id/change_label_24h"
+                    app:layout_constraintTop_toBottomOf="@+id/change_label_24h"
+                    tools:text="@tools:sample/us_zipcodes" />
 
-            <TextView
-                android:id="@+id/change_value_24h"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
-                app:layout_constraintStart_toStartOf="@+id/change_label_24h"
-                app:layout_constraintTop_toBottomOf="@+id/change_label_24h"
-                tools:text="@tools:sample/us_zipcodes" />
-
-            <TextView
-                android:id="@+id/change_value_7d"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
-                app:layout_constraintStart_toStartOf="@+id/change_label_7d"
-                app:layout_constraintTop_toBottomOf="@+id/change_label_7d"
-                tools:text="@tools:sample/us_zipcodes" />
+                <TextView
+                    android:id="@+id/change_value_7d"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@{viewModel.getChange7d}"
+                    android:textColor="@{viewModel.colorChange7d}"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+                    app:layout_constraintStart_toStartOf="@+id/change_label_7d"
+                    app:layout_constraintTop_toBottomOf="@+id/change_label_7d"
+                    tools:text="@tools:sample/us_zipcodes" />
 
 
-            <TextView
-                android:id="@+id/last_update_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/last_update_label"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/change_value_1h" />
+                <TextView
+                    android:id="@+id/last_update_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/last_update_label"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/change_value_1h" />
 
-            <TextView
-                android:id="@+id/last_update_value"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/last_update_label"
-                tools:text="@tools:sample/date/mmddyy" />
+                <TextView
+                    android:id="@+id/last_update_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@{viewModel.lastUpdate}"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/last_update_label"
+                    tools:text="@tools:sample/date/mmddyy" />
 
-        </android.support.constraint.ConstraintLayout>
-    </ScrollView>
-</android.support.design.widget.CoordinatorLayout>
+            </android.support.constraint.ConstraintLayout>
+        </ScrollView>
+    </android.support.design.widget.CoordinatorLayout>
+</layout>
+
